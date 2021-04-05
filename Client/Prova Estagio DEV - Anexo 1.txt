@@ -1,0 +1,4 @@
+Nome;Categoria
+Fulano;1
+Beltrano;2
+Siclano;1
