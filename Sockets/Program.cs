@@ -1,4 +1,5 @@
-﻿using System;  
+﻿using System;
+using System.IO;
 using System.Net;  
 using System.Net.Sockets;  
 using System.Text;  
@@ -24,9 +25,11 @@ namespace Sockets
             // If a host has multiple addresses, you will get a list of addresses  
             IPHostEntry host = Dns.GetHostEntry("localhost");  
             IPAddress ipAddress = host.AddressList[0];  
-            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);    
-        
-  
+            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
+            string caminho = "../../../../Nova lista.txt";
+
+
+
             try {   
   
                 // Create a Socket that will use Tcp protocol      
@@ -53,11 +56,17 @@ namespace Sockets
                     {  
                         break;  
                     }  
-                }  
+                }
+
+                using (StreamWriter escritor = new StreamWriter(caminho))
+                {
+                    escritor.Write(data);
+                }
+                
   
                 Console.WriteLine("Text received : {0}", data);  
   
-                byte[] msg = Encoding.ASCII.GetBytes(data);  
+                byte[] msg = Encoding.ASCII.GetBytes("Lista recebida com sucesso");  
                 handler.Send(msg);  
                 handler.Shutdown(SocketShutdown.Both);  
                 handler.Close();  
@@ -67,7 +76,7 @@ namespace Sockets
                 Console.WriteLine(e.ToString());  
             }  
   
-            Console.WriteLine("\n Press any key to continue...");  
+            Console.WriteLine("\n Precione ENTER para continuar");  
             Console.ReadKey();  
         }          
     }

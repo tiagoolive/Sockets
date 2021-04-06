@@ -25,7 +25,7 @@ namespace Client
 
         public static void StartClient()
         {
-            string caminho = "C:../../../Prova Estagio DEV - Anexo 1.txt";
+            string caminho = "../../../../Prova Estagio DEV - Anexo 1.txt";
             List<Pessoas> lista = new List<Pessoas>();
             if (File.Exists(caminho))
             {
@@ -42,7 +42,7 @@ namespace Client
                                 pessoa.Nome = linha;
                                 lista.Add(pessoa);
                             }
-                            Console.WriteLine(linha);
+                            // Console.WriteLine(linha);
                         }
                     }
                     //foreach (Pessoas i in lista)
@@ -59,7 +59,7 @@ namespace Client
             {
                 Console.WriteLine($" O arquivo {caminho} não foi localizado");
             }
-            string finalList = string.Join("\r", lista.Select(t => t.Nome).ToArray());
+            string finalList = string.Join("\n", lista.Select(t => t.Nome).ToArray());
             Console.WriteLine(finalList);
 
             byte[] bytes = new byte[1024];
