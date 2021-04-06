@@ -42,13 +42,13 @@ namespace Client
                                 pessoa.Nome = linha;
                                 lista.Add(pessoa);
                             }
-                            // Console.WriteLine(linha);
+                            Console.WriteLine(linha);
                         }
                     }
-                    //foreach (Pessoas i in lista)
-                    //{
-                    //    Console.WriteLine(i.Nome);
-                    //}
+                    ////foreach (Pessoas i in lista)
+                    ////{
+                    ////    Console.WriteLine(i.Nome);
+                    ////}
                 }
                 catch (Exception ex)
                 {
@@ -60,7 +60,7 @@ namespace Client
                 Console.WriteLine($" O arquivo {caminho} não foi localizado");
             }
             string finalList = string.Join("\n", lista.Select(t => t.Nome).ToArray());
-            Console.WriteLine(finalList);
+            //Console.WriteLine(finalList);
 
             byte[] bytes = new byte[1024];
 
@@ -84,11 +84,11 @@ namespace Client
                     // Connect to Remote EndPoint  
                     sender.Connect(remoteEP);
 
-                    Console.WriteLine("Socket connected to {0}",
+                    Console.WriteLine("Socket conectado ao {0}",
                         sender.RemoteEndPoint.ToString());
 
                     // Encode the data string into a byte array.    
-                    byte[] msg = Encoding.ASCII.GetBytes($"{finalList}<EOF>");
+                    byte[] msg = Encoding.ASCII.GetBytes(finalList);
 
                     // Send the data through the socket.    
                     int bytesSent = sender.Send(msg);

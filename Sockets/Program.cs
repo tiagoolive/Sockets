@@ -40,23 +40,16 @@ namespace Sockets
                 // We will listen 10 requests at a time  
                 listener.Listen(10);  
   
-                Console.WriteLine("Waiting for a connection...");  
+                Console.WriteLine("Esperando por uma conexão...");  
                 Socket handler = listener.Accept();  
   
                  // Incoming data from the client.    
                  string data = null;  
                  byte[] bytes = null;  
-  
-                while (true)  
-                {  
-                    bytes = new byte[1024];  
-                    int bytesRec = handler.Receive(bytes);  
-                    data += Encoding.ASCII.GetString(bytes, 0, bytesRec);  
-                    if (data.IndexOf("<EOF>") > -1)  
-                    {  
-                        break;  
-                    }  
-                }
+
+                 bytes = new byte[1024];  
+                 int bytesRec = handler.Receive(bytes);  
+                 data += Encoding.ASCII.GetString(bytes, 0, bytesRec);  
 
                 using (StreamWriter escritor = new StreamWriter(caminho))
                 {
@@ -64,9 +57,9 @@ namespace Sockets
                 }
                 
   
-                Console.WriteLine("Text received : {0}", data);  
+                Console.WriteLine("Conteudo recebido : {0}", data);  
   
-                byte[] msg = Encoding.ASCII.GetBytes("Lista recebida com sucesso");  
+                byte[] msg = Encoding.ASCII.GetBytes("Lista criada com sucesso");  
                 handler.Send(msg);  
                 handler.Shutdown(SocketShutdown.Both);  
                 handler.Close();  
@@ -76,7 +69,7 @@ namespace Sockets
                 Console.WriteLine(e.ToString());  
             }  
   
-            Console.WriteLine("\n Precione ENTER para continuar");  
+            Console.WriteLine("\n Precione ENTER para sair...");  
             Console.ReadKey();  
         }          
     }
